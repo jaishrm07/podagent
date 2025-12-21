@@ -21,8 +21,6 @@ python podagent/scripts/summarize.py transcript-for-adam-frank-alien-civilizatio
 
 # Episode 1 - adam-frank-alien-civilizations-and-the-search-for-extraterrestrial-life-lex-fridman
 
-export TOGETHER_API_KEY=tgp_v1_CaMiLODhzUf3rhwyD-ltk91h_bIe9_RAwdm-EzBMjuY
-
 python podagent/scripts/summarize.py transcript-for-adam-frank-alien-civilizations-and-the-search-for-extraterrestrial-life-lex-fridman --mode openai --structured \
   --context-chunks 10000 --output-json output1_1.json
 
