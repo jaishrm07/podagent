@@ -34,8 +34,7 @@ jobs:
         working-directory: podagent/src/web/frontend
         run: npm run build
 
-      # Debug (helps confirm index.html exists in dist)
-      - name: Verify dist
+      - name: Verify dist has index.html
         run: |
           ls -la podagent/src/web/frontend/dist
           test -f podagent/src/web/frontend/dist/index.html
