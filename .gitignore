@@ -1,0 +1,34 @@
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# Virtualenv
+.venv/
+venv/
+
+# Env files / secrets
+.env
+.env.*
+
+# Node / frontend
+node_modules/
+podagent/src/web/frontend/node_modules/
+podagent/src/web/frontend/dist/
+podagent/src/web/frontend/.vite/
+
+# Local outputs (repo root only)
+/output*.json
+
+# Local datasets / transcripts (generated or copyrighted content)
+podagent/data/
+
+# Large documents
+*.pdf
+
+# IDE
+.idea/
+.vscode/

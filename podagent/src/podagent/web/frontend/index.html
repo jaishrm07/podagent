@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PodAgent Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; }
+    .section { margin-bottom: 1.5rem; }
+    textarea { width: 100%; height: 100px; }
+    pre { background: #f5f5f5; padding: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>PodAgent Demo</h1>
+  <div class="section">
+    <label>Episode ID: <input id="episode" placeholder="slug of transcript file" size="50"/></label>
+  </div>
+  <div class="section">
+    <label>Query (optional):</label>
+    <input id="query" placeholder="optional focus question" size="60"/>
+  </div>
+  <div class="section">
+    <label><input type="checkbox" id="transformer" /> Use transformer summarizer (requires model download)</label>
+    <br/>
+    <label><input type="checkbox" id="openai" /> Use OpenAI structured summarizer</label>
+    <br/>
+    <label><input type="checkbox" id="extractive" /> Use extractive summarizer</label>
+    <br/>
+    <label>Model name: <input id="modelName" placeholder="gpt-4o-mini or HF model" size="40"/></label>
+    <br/>
+    <label>Context chunks: <input id="contextChunks" type="number" value="12" min="1" max="400" /></label>
+    <br/>
+    <label><input type="checkbox" id="structured" /> Structured output (abstract/outline/quotes/Q&A) (OpenAI only)</label>
+  </div>
+  <div class="section">
+    <button onclick="summarize()">Summarize</button>
+  </div>
+
+  <div class="section">
+    <h3>Result</h3>
+    <pre id="output"></pre>
+  </div>
+
+  <script>
+    async function summarize() {
+      const episode = document.getElementById('episode').value;
+      const query = document.getElementById('query').value;
+      const useTransformer = document.getElementById('transformer').checked;
+      const useOpenAI = document.getElementById('openai').checked;
+      const useExtractive = document.getElementById('extractive').checked;
+      const modelName = document.getElementById('modelName').value || null;
+      const contextChunks = parseInt(document.getElementById('contextChunks').value || '8', 10);
+      const structured = document.getElementById('structured').checked;
+      const apiBase = window.API_BASE || 'http://127.0.0.1:8000';
+      const payload = {
+        episode_id: episode,
+        query: query || null,
+        use_transformer: useTransformer,
+        use_openai: useOpenAI,
+        use_extractive: useExtractive,
+        model_name: modelName,
+        context_chunks: contextChunks,
+        structured: structured,
+      };
+      const res = await fetch(`${apiBase}/summarize`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>

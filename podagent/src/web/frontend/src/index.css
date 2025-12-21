@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #0b1021;
+  background-color: #f4f5fb;
+}
+
+body {
+  @apply font-body text-ink min-h-screen;
+  background-image:
+    radial-gradient(520px 520px at 10% 10%, rgba(14, 165, 233, 0.12), transparent),
+    radial-gradient(420px 420px at 80% 0%, rgba(11, 16, 33, 0.1), transparent);
+  background-repeat: no-repeat;
+  background-position: 0 0, 100% 0;
+  margin: 0;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.glass {
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.86);
+}
